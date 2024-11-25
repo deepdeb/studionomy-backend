@@ -27,7 +27,7 @@ exports.joblistController = async (req, res) => {
             return res.json({ success: false, status: 500, message: "Internal server error", response: [] });
         }
     } catch (error) {
-        logger.error(res.message);
+        logger.error('joblist controller error: ', error);
         return res.json({ success: false, status: 400, message: res.message, response: [] });
     }
 };
