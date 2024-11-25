@@ -53,6 +53,7 @@ exports.quotePuppeteerController = async (req, res) => {
         // Create a new page in the browser
         let page;
         try {
+            logger.ingo('new page before')
             page = await browser.newPage();
             logger.info('New browser page created successfully.');
         } catch (pageCreationError) {
