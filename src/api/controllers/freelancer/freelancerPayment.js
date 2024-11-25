@@ -1,6 +1,6 @@
 const logger = require("../../../config/logger");
 const Joi = require('joi');
-
+const freelancerPaymentService = require('../../services/freelancerPaymentService');
 exports.getFreelancerPaymentController = async (req, res) => {
     try {
         const freelancerPaymentDataCheck = Joi.object({
