@@ -44,29 +44,33 @@ exports.quotePuppeteerController = async (req, res) => {
         let browser;
         try {
             browser = await pdf.launch({ args: ['--no-sandbox'] });
+            // browser = await pdf.launch();
             logger.info('Puppeteer browser launched successfully.');
         } catch (browserLaunchError) {
-            logger.error('Error launching Puppeteer browser: ', browserLaunchError);
+            logger.info('Error launching Puppeteer browser: ', browserLaunchError);
             return res.status(500).json({ success: false, message: 'Error launching browser', error: browserLaunchError.message });
         }
 
         // Create a new page in the browser
-        let page;
+        let page
         try {
-            logger.ingo('new page before')
+            logger.info('new page in browser try before')
             page = await browser.newPage();
-            logger.info('New browser page created successfully.');
+            logger.info('page>>>>', page);
+            logger.info('new page in browser after')
+
         } catch (pageCreationError) {
-            logger.error('Error creating new page in browser: ', pageCreationError);
+            logger.info('Error creating new page in browser: ', pageCreationError);
             return res.status(500).json({ success: false, message: 'Error creating new page', error: pageCreationError.message });
         }
 
         // Set the content for the page
         try {
+            logger.info('set content try block before');
             await page.setContent('<html><head></head><body><h1>SL</h1></body></html>');
             logger.info('Page content set successfully.');
         } catch (pageContentError) {
-            logger.error('Error setting page content: ', pageContentError);
+            logger.info('Error setting page content: ', pageContentError);
             return res.status(500).json({ success: false, message: 'Error setting page content', error: pageContentError.message });
         }
 
@@ -107,3 +111,16 @@ exports.quotePuppeteerController = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error creating PDF', error: error.message });
     }
 }
+
+// const browse = async (browser) => {
+//     logger.info('new page in browser before')
+//     try {
+//         logger.info('browse function try block before')
+//         const newPage = browser.newPage();
+//         logger.info('browse function try block after');
+//         logger.info('new page: ', newPage);
+//         return newPage;
+//     } catch (error) {
+//         logger.info('browse catch block error:', error);
+//     }
+// }
