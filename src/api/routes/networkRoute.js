@@ -1,0 +1,21 @@
+const router = require("express").Router();
+const { searchForNetworkController } = require('../controllers/network/searchForNetwork');
+const { addToMyNetworkController } = require('../controllers/network/addToMyNetwork');
+const { myNetworkListController } = require('../controllers/network/myNetworkList');
+const { sendRequestController } = require('../controllers/network/sendRequest');
+const { deleteRequestController } = require('../controllers/network/deleteRequest');
+const { requestBookingListController } = require('../controllers/network/requestBookingList');
+const { myReqBookingListController } = require('../controllers/network/myReqBookingList');
+const { updateRequestController } = require('../controllers/network/updateRequest');
+const { bookingStatusByDatesController } = require('../controllers/network/bookingStatusByDates')
+const authenticateToken = require('../middlewares/authenticateTokenUser');
+module.exports = router;
+router.post("/searchForNetwork", authenticateToken, searchForNetworkController);
+router.post("/addToMyNetwork", authenticateToken, addToMyNetworkController);
+router.post("/myNetworks", authenticateToken, myNetworkListController);
+router.post("/sendRequest", authenticateToken, sendRequestController);
+router.post("/deleteRequest", authenticateToken, deleteRequestController);
+router.post("/requestBookingList", authenticateToken, requestBookingListController); 
+router.post("/myReqBookingList", authenticateToken, myReqBookingListController);
+router.post("/updateRequest", authenticateToken, updateRequestController);
+router.post('/bookingStatusByDates', authenticateToken, bookingStatusByDatesController);

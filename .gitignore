@@ -1,0 +1,12 @@
+/node_modules
+warn.log
+yarn-error.log
+info.log
+debug.log
+error.log
+combined.log
+/src/warn.log
+/src/info.log
+/src/error.log
+/src/debug.log
+/src/combined.log

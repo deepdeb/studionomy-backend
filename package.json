@@ -1,0 +1,49 @@
+{
+  "name": "studio-lancer-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "start": "node index.js",
+  "engines": {
+    "node": ">=16",
+    "yarn": "*"
+  },
+  "scripts": {
+    "launch": "node ./src/index.js",
+    "start": "cross-env NODE_ENV=production pm2 start ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.0",
+    "bcrypt": "^5.1.1",
+    "bluebird": "^3.7.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validation": "^4.1.0",
+    "formidable": "^3.5.1",
+    "html-pdf": "^3.0.1",
+    "html-pdf-node": "^1.0.8",
+    "http-status": "^1.7.0",
+    "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.6.1",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.13",
+    "passport": "^0.6.0",
+    "pdf-creator-node": "^2.3.5",
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^19.0.0",
+    "razorpay": "^2.9.4",
+    "sha256": "^0.2.0",
+    "winston": "^3.10.0",
+    "xlsx": "^0.18.5"
+  }
+}
