@@ -55,8 +55,8 @@ exports.quotePuppeteerController = async (req, res) => {
         let page
         try {
             logger.info('new page in browser try before')
-            page = await browser.newPage();
-            logger.info('page>>>>', page);
+            page = await browse(browser);
+            logger.info('page: ', page);
             logger.info('new page in browser after')
 
         } catch (pageCreationError) {
@@ -112,15 +112,15 @@ exports.quotePuppeteerController = async (req, res) => {
     }
 }
 
-// const browse = async (browser) => {
-//     logger.info('new page in browser before')
-//     try {
-//         logger.info('browse function try block before')
-//         const newPage = browser.newPage();
-//         logger.info('browse function try block after');
-//         logger.info('new page: ', newPage);
-//         return newPage;
-//     } catch (error) {
-//         logger.info('browse catch block error:', error);
-//     }
-// }
+const browse = async (browser) => {
+    logger.info('new page in browser before')
+    try {
+        logger.info('browse function try block before')
+        const newPage = browser.newPage();
+        logger.info('browse function try block after');
+        logger.info('new page: ', newPage);
+        return newPage;
+    } catch (error) {
+        logger.info('browse catch block error:', error);
+    }
+}
