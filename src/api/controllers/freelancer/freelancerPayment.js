@@ -18,7 +18,7 @@ exports.getFreelancerPaymentController = async (req, res) => {
 
         const resp = await freelancerPaymentService.getFreelancerPayment(req.body);
         if (resp) {
-            return res.json({ success: true, status: 200, message: "", response: resp[1], totalCount: resp[0] });
+            return res.json({ success: true, status: 200, message: "", response: resp[0], totalCount: resp[1] });
         } else {
             return res.json({ success: false, status: 500, message: "Internal server error", response: [] });
         }
