@@ -17,6 +17,7 @@ const authenticateToken = require('../middlewares/authenticateTokenUser');
 const { quotepdfController } = require("../controllers/common/quotePdf");
 const { quotationreportController } = require("../controllers/common/quotationReport");
 const { quotePuppeteerController } = require("../controllers/common/quotePuppeteer");
+const { quoteHtmlPdfController } = require("../controllers/common/quoteHtmlPdf");
 module.exports = router;
 router.get("/stateList", stateController);
 router.get("/equipmentCategoryList", equipmentCategoryController);
@@ -32,6 +33,7 @@ router.post("/quoteNoGen", authenticateToken, quoteNoGenController)
 router.post("/quotationlist", authenticateToken, quotationlistController);
 // router.post("/quotationpdf", authenticateToken, quotationpdfController);
 // router.post("/quotationPdf",authenticateToken, quotepdfController);
-router.post("/quotationPdf", authenticateToken, quotePuppeteerController);
+// router.post("/quotationPdf", authenticateToken, quotePuppeteerController);
+router.post("/quotationPdf", authenticateToken, quoteHtmlPdfController)
 router.post("/quotationbyquotenum", authenticateToken, quotationByQuoteNumController);
 router.post("/quotationReport", authenticateToken, quotationreportController);
