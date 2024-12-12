@@ -13,7 +13,7 @@ exports.updateRequest = async (data) => {
             return "Request accepted successfully";
         } 
         else if (data.reqType === 'decline') {
-            const declineSql = "UPDATE request_for_booking SET req_status = 'declined', update_date = curdate() WHERE req_id = ?"
+            const declineSql = "UPDATE request_for_booking SET req_status = 'declined', isDeleted = 1, update_date = curdate() WHERE req_id = ?"
             const [declineResp] = await writePool.query(declineSql, [data.req_id]);
             return "Request declined successfully";
         }

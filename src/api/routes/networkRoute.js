@@ -9,6 +9,7 @@ const { myReqBookingListController } = require('../controllers/network/myReqBook
 const { updateRequestController } = require('../controllers/network/updateRequest');
 const { bookingStatusByDatesController } = require('../controllers/network/bookingStatusByDates')
 const authenticateToken = require('../middlewares/authenticateTokenUser');
+const { selectedDatesForFLBookController } = require("../controllers/network/selectedDatesForFLBook");
 module.exports = router;
 router.post("/searchForNetwork", authenticateToken, searchForNetworkController);
 router.post("/addToMyNetwork", authenticateToken, addToMyNetworkController);
@@ -19,3 +20,4 @@ router.post("/requestBookingList", authenticateToken, requestBookingListControll
 router.post("/myReqBookingList", authenticateToken, myReqBookingListController);
 router.post("/updateRequest", authenticateToken, updateRequestController);
 router.post('/bookingStatusByDates', authenticateToken, bookingStatusByDatesController);
+router.post('/selectedDatesForFLBook', authenticateToken, selectedDatesForFLBookController);
