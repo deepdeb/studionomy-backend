@@ -6,6 +6,7 @@ const { inventoryListReportController } = require('../controllers/inventory/inve
 const { equipmentPublicInfoController } = require("../controllers/inventory/equipmentPublicInfo");
 const { equipmentForRentListReportController } = require("../controllers/inventory/equipmentForRentReport");
 const authenticateToken = require('../middlewares/authenticateTokenUser');
+const { equipmentListForBookController } = require("../controllers/inventory/equipmentListForBook");
 module.exports = router;
 router.post("/inventorysubmit", authenticateToken, inventoryController);
 router.post("/inventoryList", authenticateToken, inventoryListController);
@@ -13,3 +14,4 @@ router.post("/equipmentList", authenticateToken, equipmentListController);
 router.post("/equipmentPublicInfo", equipmentPublicInfoController);
 router.post("/inventoryListReport", authenticateToken, inventoryListReportController); 
 router.post("/equipmentForRentListReport", authenticateToken, equipmentForRentListReportController);
+router.post("/equipmentListForBook", equipmentListForBookController)

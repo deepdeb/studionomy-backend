@@ -41,12 +41,12 @@ exports.searchForNetwork = async (data) => {
         sql += " GROUP BY u.userId ORDER BY u.userId DESC LIMIT ? OFFSET ?";
         queryParams.push(data.limit, data.offset);
         const [resp2] = await readConn.query(sql, queryParams);
-        console.log("sql>>>",sql)
         const totalUser = countResp[0].totalUser || 0;
 
         return [resp2 || [], totalUser];
     } catch (err) {
-        logger.error(err);
+        logger.error('search for network service error: ',err);
+        console.log('search for network service error: ',err)
         return false;
     }
 };
