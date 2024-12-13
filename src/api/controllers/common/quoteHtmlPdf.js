@@ -57,13 +57,18 @@ exports.quoteHtmlPdfController = async (req, res) => {
 };
 
 const generatePDF = (htmlContent) => {
-    return new Promise((resolve, reject) => {
-        pdf.create(htmlContent).toBuffer((err, buffer) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(buffer);
-            }
+    try {
+        return new Promise((resolve, reject) => {
+            pdf.create(htmlContent).toBuffer((err, buffer) => {
+                if (err) {
+                    logger.info("pdf>>>", err);
+                    reject(err);
+                } else {
+                    resolve(buffer);
+                }
+            });
         });
-    });
+    } catch (error) {
+        logger.info("generatePDF>>>", error);
+    }
 };
