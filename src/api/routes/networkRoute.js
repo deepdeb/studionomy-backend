@@ -11,6 +11,7 @@ const { bookingStatusByDatesController } = require('../controllers/network/booki
 const authenticateToken = require('../middlewares/authenticateTokenUser');
 const { selectedDatesForFLBookController } = require("../controllers/network/selectedDatesForFLBook");
 const { sendRequestForEOController } = require("../controllers/network/sendRequestForEO");
+const { selectedEquipmentsForEOBookController } = require("../controllers/network/selectedEquipmentsForEOBook");
 module.exports = router;
 router.post("/searchForNetwork", authenticateToken, searchForNetworkController);
 router.post("/addToMyNetwork", authenticateToken, addToMyNetworkController);
@@ -22,4 +23,5 @@ router.post("/myReqBookingList", authenticateToken, myReqBookingListController);
 router.post("/updateRequest", authenticateToken, updateRequestController);
 router.post('/bookingStatusByDates', authenticateToken, bookingStatusByDatesController);
 router.post('/selectedDatesForFLBook', authenticateToken, selectedDatesForFLBookController);
+router.post('/selectedEquipmentsForEOBook', authenticateToken, selectedEquipmentsForEOBookController);
 router.post('/sendRequestForEO', sendRequestForEOController);
