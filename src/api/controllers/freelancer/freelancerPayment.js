@@ -24,6 +24,7 @@ exports.getFreelancerPaymentController = async (req, res) => {
         }
     } catch (error) {
         logger.info('freelancer payment controller error: ', error);
+        console.log('freelancer payment controller error: ', error);
         return res.json({ success: false, status: 400, message: res.message, response: [] });
     }
 }
