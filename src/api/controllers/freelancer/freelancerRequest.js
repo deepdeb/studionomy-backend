@@ -16,9 +16,9 @@ exports.getFreelancerRequestController = async (req, res) => {
         }
         logger.info(`Valid freelancer Request data`);
 
-        const resp = await freelancerRequestService.getFreelancerRequest(req.body);
+        const resp = await freelancerRequestService.getFreelancerRequest(value);
         if (resp) {
-            return res.json({ success: true, status: 200, message: "", response: resp[0], totalCount: resp[1] });
+            return res.json({ success: true, status: 200, message: "", response: resp });
         } else {
             return res.json({ success: false, status: 500, message: "Internal server error", response: [] });
         }
