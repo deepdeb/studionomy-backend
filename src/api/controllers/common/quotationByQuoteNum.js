@@ -4,7 +4,7 @@ const quotationByQuoteNumService = require('../../services/quotationByQuoteNumSe
 exports.quotationByQuoteNumController = async (req, res) => {
     try {
         const quotationByQuoteNumData = Joi.object({
-            quotation_number: Joi.required(),
+            quotation_id: Joi.required(),
             userId: Joi.required(),
             userType: Joi.required()
         })

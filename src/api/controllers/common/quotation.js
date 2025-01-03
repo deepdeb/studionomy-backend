@@ -23,6 +23,7 @@ exports.quotationController = async (req, res) => {
             eventLocation: Joi.required(),
             total_amt: Joi.required(),
             projectDesc: Joi.required(),
+            jobType: Joi.required(),
             quotethemeImg: Joi.optional(),
             customName: Joi.optional(),
             customValue: Joi.optional(),
