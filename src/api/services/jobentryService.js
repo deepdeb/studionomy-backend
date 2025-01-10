@@ -31,6 +31,9 @@ exports.jobentry = async (data) => {
     
                 let empStatusSql = "UPDATE employee_book SET job_id = ?,bookingStatus = 1 WHERE userId = ? AND userType = ? AND job_number = ?"
                 const [resp2] = await writePool.query(empStatusSql, [parseInt(resp.insertId), parseInt(data.userId), parseInt(data.userType), data.job_number]);
+
+                let quotationDeleteSql = "update quotations set is_Deleted = 1 where quotation_id = ?"
+                const [quotaitonDeleteResp] = await writePool.query(quotationDeleteSql, [data.quotation_id]);
                 
                 //-----------------------------------------Job Book Keeping--------------------------------------------------------//
                 let jobBookKeepingBookingAmountAndJobDetailsSql = "INSERT INTO job_book_keeping (userId, userType, job_id, job_number, job_value, payment_amount, payment_date, payment_description, payment_type, payment_status, profit, job_details) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"

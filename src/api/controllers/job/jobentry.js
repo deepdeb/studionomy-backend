@@ -4,6 +4,7 @@ const jobentryService = require("../../services/jobentryService");
 exports.jobentryController = async (req, res) => {
     try {
         const jobentryData = Joi.object({
+            quotation_id: Joi.optional(),
             job_id: Joi.optional(),
             job_number: Joi.required(),
             userId: Joi.number().required(),
