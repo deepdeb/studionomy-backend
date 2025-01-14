@@ -20,7 +20,7 @@ exports.userUpdateController = async (req, res) => {
             reference: Joi.optional(),
             passcode: Joi.optional(),
             workImg1: Joi.optional(),
-            workImg2: Joi.optional(),
+            profileImg: Joi.optional(),
             workImg3: Joi.optional(),
             aboutusImg: Joi.optional(),
             reffeedbackImg: Joi.optional(),
