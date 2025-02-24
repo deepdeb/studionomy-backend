@@ -2,12 +2,35 @@ const readConn = require('../../config/mysql').readPool
 const logger = require("../../config/logger");
 exports.bookingStatusByDates = async (data) => {
     try {
-        let sql = "SELECT DATE_FORMAT(r.req_date, '%Y-%m-%d') as req_date, r.req_status from request_for_booking as r where r.isDeleted=0 AND r.isCancel = 0 AND r.req_to = ? AND r.req_to_userType = ? AND r.req_date IN (?)"
-        const [resp] = await readConn.query(sql, [data.userId, Number(data.userType), data.datesToCheck]);
-        return resp ? resp : [];
+        var response = {}
+        for (let userId of data.networkUserIds) {
+            var resultArr = data.datesToCheck.map(date => ({
+                date: date,
+                req_status: null
+            }))
+
+            for (let date of data.datesToCheck) {
+                let sql = "SELECT req_date, req_status from request_for_booking WHERE isDeleted=0 AND isCancel = 0 AND req_to = ? AND req_date = ?"
+                const [resp] = await readConn.query(sql, [userId, date]);
+
+                if (resp[0]) {
+                    for (let result of resultArr) {
+                        if (result.date == resp[0].req_date.toISOString().split('T')[0]) {
+                            result.req_status = resp[0].req_status
+                        }
+                    }
+                }
+            }
+
+            response[userId] = resultArr
+        }
+
+        return response
+
     }
     catch (err) {
-        logger.error(err);
+        logger.error('booking status by dates service error: ', err);
+        console.log('booking status by dates service error: ', err);
         return false;
     }
 };

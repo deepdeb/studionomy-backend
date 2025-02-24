@@ -5,8 +5,7 @@ exports.bookingStatusByDatesController = async (req, res) => {
     try {
         const bookingStatusByDatesData = Joi.object({
             datesToCheck: Joi.required(),
-            userId: Joi.required(),
-            userType: Joi.required()
+            networkUserIds: Joi.required()
         })
         const { error, value } = bookingStatusByDatesData.validate(req.body);
         if(error) {
@@ -21,7 +20,8 @@ exports.bookingStatusByDatesController = async (req, res) => {
             return res.json({ success: false, status: 500, message: "Internal server error", response: [] });
         }
     } catch (error) {
-        logger.error(res.message);
+        logger.error('booking status by dates controller error: ', error);
+        console.log('booking status by dates controller error: ', error);
         return res.json({ success: false, status: 400, message: res.message, response: []})
     }
 }
