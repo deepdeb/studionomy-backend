@@ -5,14 +5,19 @@ const app = require("./config/express");
 const mysql = require("./config/mysql");
 const axios = require("axios");
 const cron = require("node-cron");
-//mysql.connect();
+const fs = require("fs");
+const https = require("https");
 
-// listen to requests
+
+// const options = {
+//     key: fs.readFileSync("/var/webuzo/users/studionomy/ssl/studionomy.com.key"),  // Path to your private key
+//     cert: fs.readFileSync("/var/webuzo/users/studionomy/ssl/studionomy.com-combined.pem") // Path to your certificate
+// };
+
+
+
+// https.createServer(options, app).listen(port);
 app.listen(port, () => logger.info(`Server started on port ${port} || 5000 (${env})`));
-//app.listen(5000, () => logger.info(`Server started on port ${5000}`));
 
-/**
- * Exports express
- * @public
- */
+
 module.exports = app;
