@@ -3,6 +3,7 @@ const Joi = require('joi');
 const bookkeepingsubmitService = require("../../services/bookkeepingsubmitService");
 exports.bookkeepingSubmitController = async (req, res) => {
     try {
+        console.log('6>>>', req.body);
         const bookkeepingsubmitCheck = Joi.object({
             userId: Joi.number().required(),
             userType: Joi.number().required(),
@@ -14,6 +15,7 @@ exports.bookkeepingSubmitController = async (req, res) => {
             credit_amount: Joi.optional(),
             credit_mode: Joi.optional(),
             closing_balance: Joi.required(),
+            cust_phone_num: Joi.optional(),
             remarks: Joi.optional()
         });
         const { error, value } = bookkeepingsubmitCheck.validate(req.body);

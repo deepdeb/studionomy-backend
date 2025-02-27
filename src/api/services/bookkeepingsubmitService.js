@@ -9,8 +9,8 @@ exports.bookkeepingSubmit = async (data) => {
             return "Record update successfully"
         }
         else {
-            let sql = "INSERT INTO book_keeping (userId,userType,book_date,b_description,debit_amount,debit_mode,credit_amount,credit_mode,closing_balance,remarks) VALUES(?,?,?,?,?,?,?,?,?,?)"
-            const [resp] = await writePool.query(sql, [data.userId, data.userType, data.book_date, data.b_description, data.debit_amount, data.debit_mode, data.credit_amount, data.credit_mode, data.closing_balance, data.remarks]);
+            let sql = "INSERT INTO book_keeping (userId,userType,book_date,b_description,debit_amount,debit_mode,credit_amount,credit_mode,closing_balance,cust_phone_num, remarks) VALUES(?,?,?,?,?,?,?,?,?,?,?)"
+            const [resp] = await writePool.query(sql, [data.userId, data.userType, data.book_date, data.b_description, data.debit_amount, data.debit_mode, data.credit_amount, data.credit_mode, data.closing_balance, data.cust_phone_num, data.remarks]);
             return "Record submit successfully"
         }
 
