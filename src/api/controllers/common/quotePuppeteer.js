@@ -7,48 +7,49 @@ const path = require('path');
 exports.quotePuppeteerController = async (req, res) => {
     try {
         const directory = path.join(__dirname, '../../../../public/uploads/quotes/');
-        console.log('>>>', directory);
-        const quotationpdfData = Joi.object({
-            userId: Joi.required(),
-            userType: Joi.required(),
-            studioName: Joi.required(),
-            job_details: Joi.required(),
-            quotation_number: Joi.required(),
-            job_startDate: Joi.required(),
-            job_endDate: Joi.required(),
-            bookingDates: Joi.required(),
-            specializations: Joi.required(),
-            crews: Joi.required(),
-            address: Joi.required(),
-            cust_firstName: Joi.required(),
-            cust_lastName: Joi.required(),
-            cust_phoneNo: Joi.required(),
-            cust_altPhoneNo: Joi.required(),
-            cust_email: Joi.required(),
-            eventLocation: Joi.required(),
-            total_amt: Joi.required(),
-            projectDesc: Joi.required(),
-            quotethemeImg: Joi.optional(),
-            customName: Joi.optional(),
-            customValue: Joi.optional(),
-            deliverables: Joi.required(),
-            termscondition: Joi.required()
-        });
+        // const quotationpdfData = Joi.object({
+        //     userId: Joi.required(),
+        //     userType: Joi.required(),
+        //     studioName: Joi.required(),
+        //     job_details: Joi.required(),
+        //     quotation_number: Joi.required(),
+        //     job_startDate: Joi.required(),
+        //     job_endDate: Joi.required(),
+        //     bookingDates: Joi.required(),
+        //     specializations: Joi.required(),
+        //     crews: Joi.required(),
+        //     address: Joi.required(),
+        //     cust_firstName: Joi.required(),
+        //     cust_lastName: Joi.required(),
+        //     cust_phoneNo: Joi.required(),
+        //     cust_altPhoneNo: Joi.required(),
+        //     cust_email: Joi.required(),
+        //     eventLocation: Joi.required(),
+        //     total_amt: Joi.required(),
+        //     projectDesc: Joi.required(),
+        //     quotethemeImg: Joi.optional(),
+        //     customName: Joi.optional(),
+        //     customValue: Joi.optional(),
+        //     deliverables: Joi.required(),
+        //     termscondition: Joi.required()
+        // });
 
-        // Validate the data
-        const { error, value } = quotationpdfData.validate(req.body);
-        if (error) {
-            logger.error(`Invalid quotation data: ${error.details[0].message}`);
-            return res.status(400).json({ success: false, message: error.details[0].message.replace(/["':]/g, '') });
-        }
-        logger.info(`Valid quotation data`);
+        // // Validate the data
+        // const { error, value } = quotationpdfData.validate(req.body);
+        // if (error) {
+        //     logger.error(`Invalid quotation data: ${error.details[0].message}`);
+        //     return res.status(400).json({ success: false, message: error.details[0].message.replace(/["':]/g, '') });
+        // }
+        // logger.info(`Valid quotation data`);
 
+
+        
         // Launch Puppeteer browser
         let htmlContent = '<html><head></head><body><h1>SL</h1></body></html>';
         let browser;
         try {
             browser = await pdf.launch({
-                headless: true,
+                headless: false,
                 args: ['--no-sandbox', '--disable-setuid-sandbox'],
                 timeout: 60000
             });

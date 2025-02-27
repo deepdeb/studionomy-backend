@@ -6,47 +6,49 @@ const path = require('path');
 const { PDFDocument } = require('pdf-lib');
 exports.quotationpdfController = async (req, res) => {
     try {
-        const quotationpdfData = Joi.object({
-            userId: Joi.required(),
-            userType: Joi.required(),
-            studioName: Joi.required(),
-            job_details: Joi.required(),
-            quotation_number: Joi.required(),
-            job_startDate: Joi.required(),
-            job_endDate: Joi.required(),
-            bookingDates: Joi.required(),
-            specializations: Joi.required(),
-            crews: Joi.required(),
-            address: Joi.required(),
-            cust_firstName: Joi.required(),
-            cust_lastName: Joi.required(),
-            cust_phoneNo: Joi.required(),
-            cust_altPhoneNo: Joi.required(),
-            cust_email: Joi.required(),
-            eventLocation: Joi.required(),
-            total_amt: Joi.required(),
-            projectDesc: Joi.required(),
-            quotethemeImg: Joi.optional(),
-            customName: Joi.optional(),
-            customValue: Joi.optional(),
-            deliverables: Joi.required(),
-            termscondition: Joi.required()
-        });
-        const { error, value } = quotationpdfData.validate(req.body);
-        if (error) {
-            logger.error(`Invalid quotation data : ${error.details[0].message}`);
-            return res.status(400).json({ success: false, message: error.details[0].message.replace(/["':]/g, '') });
-        }
-        logger.info(`Valid quotation data`);
+        // const quotationpdfData = Joi.object({
+        //     userId: Joi.required(),
+        //     userType: Joi.required(),
+        //     studioName: Joi.required(),
+        //     job_details: Joi.required(),
+        //     quotation_number: Joi.required(),
+        //     job_startDate: Joi.required(),
+        //     job_endDate: Joi.required(),
+        //     bookingDates: Joi.required(),
+        //     specializations: Joi.required(),
+        //     crews: Joi.required(),
+        //     address: Joi.required(),
+        //     cust_firstName: Joi.required(),
+        //     cust_lastName: Joi.required(),
+        //     cust_phoneNo: Joi.required(),
+        //     cust_altPhoneNo: Joi.required(),
+        //     cust_email: Joi.required(),
+        //     eventLocation: Joi.required(),
+        //     total_amt: Joi.required(),
+        //     projectDesc: Joi.required(),
+        //     quotethemeImg: Joi.optional(),
+        //     customName: Joi.optional(),
+        //     customValue: Joi.optional(),
+        //     deliverables: Joi.required(),
+        //     termscondition: Joi.required(),
+        //     jobType: Joi.optional()
+        // });
+        // const { error, value } = quotationpdfData.validate(req.body);
+        // if (error) {
+        //     logger.error(`Invalid quotation data : ${error.details[0].message}`);
+        //     return res.status(400).json({ success: false, message: error.details[0].message.replace(/["':]/g, '') });
+        // }
+        // logger.info(`Valid quotation data`);
 
         const imageDataPath = path.resolve(__dirname, '../../../../public/uploads/themes/SL-Logo.png');
-        const backgroundImageDataPath = path.resolve(__dirname, `../../../../public/uploads/images/${value.quotethemeImg}`);
-        const backgroundImageData2Path = path.resolve(__dirname, `../../../../public/uploads/images/${value.quotethemeImg}`);
+        const backgroundImageDataPath = path.resolve(__dirname, `../../../../public/uploads/themes/4.jpg`);
+        const backgroundImageData2Path = path.resolve(__dirname, `../../../../public/uploads/themes/3.jpg`);
 
         const imageData = fs.readFileSync(imageDataPath, 'base64');
         const backgroundImageData = fs.readFileSync(backgroundImageDataPath, 'base64');
         const backgroundImageData2 = fs.readFileSync(backgroundImageData2Path, 'base64')
-        logger.info(`Before Html content`);
+
+
         let htmlContent = `<html><head>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -223,19 +225,19 @@ exports.quotationpdfController = async (req, res) => {
                 </div>
             </body>
         </html>`
-        logger.info(`Html text`);
+
+        // let htmlContent = '<html><head></head><body><h1>SL</h1></body></html>';
+
+
         const overlayImagePath1 = backgroundImageDataPath
         const overlayImagePath2 = backgroundImageData2Path
 
         let file = { content: htmlContent };
-        logger.info(`before generate pdf`)
+
         const pdfBuffer = await generatePdf(file)
-        logger.info(`after generate pdf`)
-        logger.error("pdfBuffer>>>>",pdfBuffer);
+
         if (pdfBuffer) {
-            logger.info("pdfBuffer>>>enter>",pdfBuffer);
             const modifiedPdfBufferArray = await addOverlayImagesToPdfBuffer(pdfBuffer, overlayImagePath1, overlayImagePath2)
-            logger.info("modifiedPdfBufferArray>>>enter>",modifiedPdfBufferArray);
             const modifiedPdfBuffer = Buffer.from(modifiedPdfBufferArray);
             res.set({ 'Content-Type': 'application/pdf', 'Content-Disposition': 'attachment; filename=quotation.pdf' });
             return res.send(modifiedPdfBuffer)
@@ -243,10 +245,6 @@ exports.quotationpdfController = async (req, res) => {
             return res.json({ success: false, status: 500, message: "Error reading file" })
         }
     } catch (error) {
-        console.log(error);
-        logger.error("error",error);
-        logger.info("error",error);
-        logger.error(res.message);
         return res.json({ success: false, status: 400, message: res.message, response: [] });
     }
 };
@@ -266,9 +264,7 @@ exports.quotationpdfController = async (req, res) => {
 // };
 
 const generatePdf = (htmlContent) => {
-    logger.info('inside generatePdf first')
     try {
-        logger.info('enter generatePdf try block')
         return pdf2.generatePdf(htmlContent, { format: 'A4' })
         .then(pdfBuffer => {
             if (pdfBuffer) {
@@ -278,11 +274,9 @@ const generatePdf = (htmlContent) => {
             }
         })
         .catch(error => {  
-            logger.info('inside generatepdf error: ', error) 
             throw error;
         });
     } catch (error) {
-        logger.info('Outside catch error: ', error)
         throw error;
     }
 };

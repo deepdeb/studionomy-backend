@@ -1,11 +1,31 @@
 const { logs } = require('./vars');
 const winston = require('winston');
 const { combine, timestamp, label, printf } = winston.format;
+const fs = require('fs')
+const path = require('path')
 
 // Custom log format to include timestamp and level
 const customFormat = printf(({ timestamp, level, message }) => {
   return `[${timestamp}] ${level.toUpperCase()}: ${message}`;
 });
+
+
+// Log file paths
+const logFilePaths = ['error.log', 'warn.log', 'info.log', 'debug.log', 'combined.log'];
+
+
+// Function to check if the log files exist and create them if not
+const createLogFileIfNotExist = (filePath) => {
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, '', 'utf8');
+  }
+};
+
+
+logFilePaths.forEach((filePath) => {
+  createLogFileIfNotExist(path.join(__dirname, '../../', filePath));
+});
+
 
 const loggerTransports = [
   // Separate transport for error logs in all modes

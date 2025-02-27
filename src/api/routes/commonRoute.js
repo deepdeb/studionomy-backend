@@ -11,14 +11,17 @@ const { sendMailController } = require('../controllers/common/sendMail')
 const { quotationController } = require('../controllers/common/quotation');
 const { quoteNoGenController } = require("../controllers/common/quoteNoGen");
 const { quotationlistController } = require('../controllers/common/quotationList')
-const { quotationpdfController } = require('../controllers/common/quotationpdf')
 const { quotationByQuoteNumController } = require('../controllers/common/quotationByQuoteNum')
 const authenticateToken = require('../middlewares/authenticateTokenUser');
 const { quotepdfController } = require("../controllers/common/quotePdf");
 const { quotationreportController } = require("../controllers/common/quotationReport");
 const { quotePuppeteerController } = require("../controllers/common/quotePuppeteer");
-const { quoteHtmlPdfController } = require("../controllers/common/quoteHtmlPdf");
+// const { quoteHtmlPdfController } = require("../controllers/common/quoteHtmlPdf");
+const { quoteHtmlPdf2Controller } = require("../controllers/common/quoteHtmlPdf2");
+const { quotationpdfController } = require('../controllers/common/quotationpdf')
+
 module.exports = router;
+
 router.get("/stateList", stateController);
 router.get("/equipmentCategoryList", equipmentCategoryController);
 router.post("/equipmentSubCategoryList", equipmentSubCategoryController);
@@ -34,6 +37,8 @@ router.post("/quotationlist", authenticateToken, quotationlistController);
 // router.post("/quotationpdf", authenticateToken, quotationpdfController);
 // router.post("/quotationPdf",authenticateToken, quotepdfController);
 // router.post("/quotationPdf", authenticateToken, quotePuppeteerController);
-router.post("/quotationPdf", authenticateToken, quoteHtmlPdfController)
+// router.post("/quotationPdf", authenticateToken, quoteHtmlPdfController)
+router.post("/quotationPdf", authenticateToken, quoteHtmlPdf2Controller)
+// router.post("/quotationPdf", authenticateToken, quotationpdfController)
 router.post("/quotationbyquotenum", authenticateToken, quotationByQuoteNumController);
 router.post("/quotationReport", authenticateToken, quotationreportController);
