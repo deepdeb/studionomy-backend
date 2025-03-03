@@ -23,7 +23,8 @@ exports.userlistController = async (req, res) => {
             return res.json({ success: false, status: 500, message: "Internal server error", response: [] });
         }
     } catch (error) {
-        logger.error(res.message);
+        console.log('user list controller error: ', error)
+        logger.error('user list controller error: ', error);
         return res.json({ success: false, status: 400, message: res.message, response: [] });
     }
 };
